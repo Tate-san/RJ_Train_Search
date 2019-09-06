@@ -125,18 +125,15 @@ def get_dest():
 
 
 if __name__ == '__main__':
-    print('From: ')
-    selected_from = get_dest()
-    print('To: ')
-    selected_to = get_dest()
-    #print(selected_from,selected_to)
-    dep_date = (input('When to departure?: ')).split(".", -1)
-    #selected_from = ['','3398241000'] #judenice
-    #selected_to = ['','372825000'] #praga
-    #dep_date = ['06','10','2019']
-    #print(dep_date)
-    url = (f'https://brn-ybus-pubapi.sa.cz/restapi/routes/search/simple?locale=cs&departureDate={dep_date[2]}-{dep_date[1]}-{dep_date[0]}&fromLocationId=3398241000&toLocationId=372825000&fromLocationType=STATION&toLocationType=STATION&tariffs=REGULAR')
-    get_ids(url)
-    get_trains(selected_from[1],selected_to[1])
-    #print(travels)
-    print_data() 
+    if requests.get(route_url).status_code == 200:
+        print('From: ')
+        selected_from = get_dest()
+        print('To: ')
+        selected_to = get_dest()
+        dep_date = (input('[DD.MM.YY] When to departure?: ')).split(".", -1)
+        url = (f'https://brn-ybus-pubapi.sa.cz/restapi/routes/search/simple?locale=cs&departureDate={dep_date[2]}-{dep_date[1]}-{dep_date[0]}&fromLocationId=3398241000&toLocationId=372825000&fromLocationType=STATION&toLocationType=STATION&tariffs=REGULAR')
+        get_ids(url)
+        get_trains(selected_from[1],selected_to[1])
+        print_data() 
+    else:
+        print('Page is not responding')
