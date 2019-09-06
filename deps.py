@@ -134,6 +134,8 @@ if __name__ == '__main__':
         url = (f'https://brn-ybus-pubapi.sa.cz/restapi/routes/search/simple?locale=cs&departureDate={dep_date[2]}-{dep_date[1]}-{dep_date[0]}&fromLocationId=3398241000&toLocationId=372825000&fromLocationType=STATION&toLocationType=STATION&tariffs=REGULAR')
         get_ids(url)
         get_trains(selected_from[1],selected_to[1])
-        print_data() 
+        # check if route exists
+        print_data()
+         
     else:
         print('Page is not responding')
